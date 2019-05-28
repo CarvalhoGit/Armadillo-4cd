@@ -18,7 +18,7 @@ def decipher(data_loaded):
     text_encrypted = data_loaded['cifrado'].lower()
     text_deciphered = ''
     number_jump = data_loaded['numero_casas']
-    especial_caract = ',.+-*//?°:;<>,.~^]}º[{ª´`+=§_-)(*&¨%$#@!¬¢£³²¹"\'\\'
+    especial_caract = '´’,.+-*//?°:;<>,.~^]}º[{ª´`+=§_-)(*&¨%$#@!¬¢£³²¹"\'\\'
     alphabet = {1: 'aáàâãä', 2: 'b', 3: 'c', 4: 'd', 5: 'eéèêë', 6: 'f', 7: 'g', 8: 'h', 9: 'iííîï', 10: 'j',
                 11: 'k', 12: 'l', 13: 'm', 14: 'n', 15: 'oóòôõö', 16: 'p', 17: 'q', 18: 'r', 19: 's',
                 20: 't', 21: 'uúùûü', 22: 'v', 23: 'w', 24: 'x', 25: 'y', 26: 'z'}
@@ -43,6 +43,7 @@ def decipher(data_loaded):
 def save_json(data_request):
     with open('answer.json', 'w') as outfile:  # open the archive 'answer.json' as write. outfile = 'answer.json'
         json.dump(data_request, outfile)  # save data inside outfile. data is the dict and outfile is the archive
+    print(data_request)
 
 
 def load_json():
