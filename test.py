@@ -1,4 +1,4 @@
-from armadillo_4cd import decipher
+from armadillo_4cd import decipher, string_hash
 
 
 def test():
@@ -11,6 +11,7 @@ def test():
     data['numero_casas'] = 11
     data['decifrado'] = ''
     assert decipher(data) == 'wftd.qpcylyoz1\''
+    assert string_hash
 
 
 if __name__ == '__main__':

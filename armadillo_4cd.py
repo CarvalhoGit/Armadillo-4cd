@@ -1,17 +1,17 @@
 import requests
 import json
+import hashlib
 
-
-def request():
-    try:
-        url = requests.get(
-            'https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=1d0408fc4d2159e2b0446a0f4c3f0c525145ef69'
-        )
-        data_request = url.json()  # stores the response. data_request = dict
-        decipher(data_request)
-    except:
-        print('Não foi possível obter resposta da url especificada.'
-              '\nVerique sua conexão com a Internet!')
+# def request():
+#     try:
+#         url = requests.get(
+#             'https://api.codenation.dev/v1/challenge/dev-ps/generate-data?token=1d0408fc4d2159e2b0446a0f4c3f0c525145ef69'
+#         )
+#         data_request = url.json()  # stores the response. data_request = dict
+#         decipher(data_request)
+#     except:
+#         print('Não foi possível obter resposta da url especificada.'
+#               '\nVerique sua conexão com a Internet!')
 
 
 def decipher(data_loaded):
@@ -36,8 +36,15 @@ def decipher(data_loaded):
                 break
 
     data_loaded['decifrado'] = text_deciphered
-    save_json(data_loaded)
+    string_hash(data_loaded)
     return data_loaded['decifrado']
+
+
+def string_hash(data_loaded):
+    text = bytes(data_loaded['decifrado'], 'UTF-8')
+    hash = hashlib.new("sha1", text).hexdigest()
+    data_loaded['resumo_criptografico'] = hash
+    save_json(data_loaded)
 
 
 def save_json(data_request):
@@ -53,5 +60,5 @@ def load_json():
 
 
 if __name__ == '__main__':
-    request()
-    # load_json()
+    # request()
+    load_json()
