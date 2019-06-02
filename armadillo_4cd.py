@@ -15,6 +15,12 @@ def request():
               '\nVerique sua conexão com a Internet!')
 
 
+def post(data):
+    headers = {'Content-type': 'multipart/form-data'}
+    post = requests.post('https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=SEU_TOKEN',
+                         file='answer', data=data, headers=headers)
+
+
 # def decipher(data_loaded):
 #     text_encrypted = data_loaded['cifrado'].lower()
 #     text_deciphered = ''
@@ -72,15 +78,14 @@ def string_hash(data_loaded):
 def save_json(data_request):
     with open('answer.json', 'w') as outfile:  # open the archive 'answer.json' as write. outfile = 'answer.json'
         json.dump(data_request, outfile)  # save data inside outfile. data is the dict and outfile is the archive
-    print(data_request)
 
 
 def load_json():
     with open('answer.json') as infile:  # open the archive 'answer.json' as read. infile = 'answer.json'
         data_loaded = json.load(infile)  # data = content of archive
-    decipher(data_loaded)
+    post(data_loaded)
 
 
 if __name__ == '__main__':
-    request()
-    # load_json()
+    # request()
+    load_json()
